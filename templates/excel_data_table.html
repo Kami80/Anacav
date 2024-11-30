@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Data Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .search-bar, .create-button {
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-bar button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .create-button a {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .create-button a:hover {
+            background-color: #218838;
+        }
+        .action-buttons a {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        .btn-detail {
+            background-color: #17a2b8;
+        }
+        .btn-detail:hover {
+            background-color: #138496;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+        }
+        .btn-edit:hover {
+            background-color: #e0a800;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Excel Data Table</h1>
+    <div class="search-bar">
+        <form method="get">
+            <input type="text" name="q" placeholder="Search by city..." value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="create-button">
+        <a href="{% url 'excel_data_create' %}">Add New Entry</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>Code</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Pending Tasks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.city }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.month }}</td>
+                <td>{{ item.pending_tasks }}</td>
+                <td class="action-buttons">
+                    
+                    <a href="{% url 'excel_data_update' item.id %}" class="btn-edit">Edit</a>
+                    <a href="{% url 'excel_data_delete' item.id %}" class="btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No data found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Data Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .detail-container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .detail-container h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        <h1>Excel Data Detail</h1>
+        <table>
+            <tr>
+                <th>City</th>
+                <td>{{ data.city }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ data.code }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ data.year }}</td>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>{{ data.month }}</td>
+            </tr>
+            <tr>
+                <th>Pending Tasks</th>
+                <td>{{ data.pending_tasks }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'excel_data_table' %}">Back to List</a>
+    </div>
+</body>
+</html>
